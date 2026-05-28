@@ -2,14 +2,15 @@ import re
 
 
 def normalize_phone(phone_number):
+    """Normalize phone number to +38XXXXXXXXXX format."""
     # Remove all non-digit characters
-    phone_number = re.sub(r'\D', '', phone_number)
-    if phone_number.startswith('380'):
-        phone_number = '+' + phone_number
+    digits_only = re.sub(r'\D', '', phone_number)
+    
+    # Add country code if not present
+    if digits_only.startswith('380'):
+        return '+' + digits_only
     else:
-        phone_number = '+38' + phone_number
-
-    return phone_number
+        return '+38' + digits_only
 
 
 raw_numbers = [
